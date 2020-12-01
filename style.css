@@ -1,0 +1,58 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    border-left: 1px solid black;
+    margin-left: 5px;
+    padding-left: 5px;
+}
+
+input {
+    width: 40px;
+    text-align: right;
+}
+
+button {
+    margin-left: 20px;
+}
+
+
+.cell {
+    height: 15px;
+    width: 15px;
+    transition: background-color 1s linear;
+}
+
+#app {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    /* padding: 10px; */
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.grid {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: solid black 3px;
+}
