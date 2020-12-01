@@ -223,7 +223,6 @@ function fillGrid() {
     function fillStop() {
         if (storeKeys.length === 0){
             clearInterval(fillDelay)
-            alert('All colors filled.')
         } else {
             randomFillCell();
 
