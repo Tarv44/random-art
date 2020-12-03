@@ -169,19 +169,19 @@ function skewColor(colorInfo) {
 }
 
 function fillCellColor(cell, surroundingColors) {
-    const probability = Math.random()
+    const probability = (Math.random()*100)
     const colorIndex = (Math.floor(surroundingColors.length * Math.random()))
     const colorSelect = surroundingColors[colorIndex]
     if (probability < sameChance) {
         $(`#${cell}`).css('background-color', colorSelect.rgb)
         STORE[cell].filled = true
         STORE[cell].colorInfo = colorSelect
-    } else if (probability < skewChance) {
+    } else if (probability < sameChance + skewChance) {
         const newColor = skewColor(colorSelect)
         $(`#${cell}`).css('background-color', newColor.rgb)
         STORE[cell].filled = true
         STORE[cell].colorInfo = newColor
-    } else {
+    } else if (probability > sameChance + skewChance){
         const newColor = generateRandomRGB()
         $(`#${cell}`).css('background-color', newColor.rgb)
         STORE[cell].filled = true
@@ -230,9 +230,37 @@ function fillGrid() {
     }
 }
 
+function watchPercentSelect() {
+    $('#sameColor').change(event => {
+        let samePlusSkew = Number($('#sameColor').val()) + Number($('#skewColor').val())
+        const overHundred = samePlusSkew > 100
+        if (!$('#skewColor').val() || overHundred){
+            const skewPercent = (100 - $('#sameColor').val())
+            $('#skewColor').val(skewPercent)
+            samePlusSkew = Number($('#sameColor').val()) + Number($('#skewColor').val())
+        }
+        const newColor = (100 - samePlusSkew).toFixed(2)
+        $('#newColor').html(newColor)
+    })
+
+    $('#skewColor').change(event => {
+        let samePlusSkew = Number($('#sameColor').val()) + Number($('#skewColor').val())
+        const overHundred = samePlusSkew > 100
+        if (!$('#sameColor').val() || overHundred){
+            const samePercent = (100 - $('#skewColor').val())
+            $('#sameColor').val(samePercent)
+            samePlusSkew = Number($('#sameColor').val()) + Number($('#skewColor').val())
+        }
+        const newColor = (100 - samePlusSkew).toFixed(2)
+        $('#newColor').text(newColor)
+    })
+}
+
 function watchSubmit() {
     $('form').submit(event => {
         event.preventDefault()
+        $('#app').empty()
+        renderGrid()
         sameChance = Number($('#sameColor').val())
         skewChance = Number($('#skewColor').val())
         newChance = Number($('#newColor').val())
@@ -243,6 +271,7 @@ function watchSubmit() {
 
 function setupPage() {
     renderGrid()
+    watchPercentSelect()
     watchSubmit()
 }
 

@@ -9,12 +9,11 @@
 <body>
     <main>
         <form>
-            <label for="sameColor">Chance of same color (decimal e.g. 0.9 = 90%):</label>
-            <input type="text" name="sameColor" id="sameColor" value=.9>
-            <label for="skewColor">Chance of skewed color (decimal):</label>
-            <input type="text" name="skewColor" id="skewColor" value=.999>
-            <label for="newColor">Chance of new color (decimal):</label>
-            <input type="text" name="newColor" id="newColor" value=.001>
+            <label for="sameColor">Chance of same color:</label>
+            <input type="text" name="sameColor" id="sameColor" placeholder=90 required>
+            <label for="skewColor">Chance of skewed color:</label>
+            <input type="text" name="skewColor" id="skewColor" placeholder=9 required>
+            <label>Chance of new color: <span id="newColor">1</span>%</label>
             <label for="nodes">Starting nodes:</label>
             <input type="text" name="nodes" id="starting-nodes" value=1>
             <button type="submit">Fill Colors</button>
